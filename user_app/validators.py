@@ -10,6 +10,7 @@ def phone_number_validator(phone_number: str):
 
 
 def date_of_birth_validator(date_of_birth: str):
+    date_of_birth = str(date_of_birth)
     y, m, d = map(int, date_of_birth.split('-'))
     dob = datetime.date(year=y, month=m, day=d)
     if age(dob) < 18:
