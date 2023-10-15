@@ -21,3 +21,7 @@ migrations:  ## Create new migration(s)
 .PHONY: test
 test:	## Run project tests
 	python3 manage.py test
+
+.PHONY: requirements
+requirements:	## Run project tests
+	pip freeze > requirements.txt
