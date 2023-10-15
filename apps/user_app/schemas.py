@@ -9,11 +9,6 @@ class LoginResponseSchema(serializers.Serializer):
     access_token = serializers.CharField(max_length=1000)
 
 
-class LoginErrorResponseSchema(serializers.Serializer):
-    status = serializers.CharField(max_length=20, required=True)
-    description = serializers.CharField(max_length=250, required=True)
-
-
 class RegisterResponseSchema(serializers.Serializer):
     id = serializers.IntegerField()
     username = serializers.CharField(max_length=12)
@@ -42,16 +37,12 @@ class ChangeAvatarRequestSchema(serializers.Serializer):
     avatar = serializers.ImageField()
 
 
-class ChangeAvatarResponseSchema(serializers.Serializer):
-    status = serializers.CharField(max_length=20, required=True)
-    description = serializers.CharField(max_length=250, required=True)
+class ChangePasswordRequestSchema(serializers.Serializer):
+    old_password = serializers.CharField(max_length=128)
+    password = serializers.CharField(max_length=128)
+    confirm_password = serializers.CharField(max_length=128)
 
 
-class ChangeUserResponseSchema(serializers.Serializer):
-    status = serializers.CharField(max_length=20, required=True)
-    description = serializers.CharField(max_length=250, required=True)
-
-
-class UserNotFoundResponseSchema(serializers.Serializer):
+class StatusDescriptionResponseSchema(serializers.Serializer):
     status = serializers.CharField(max_length=20, required=True)
     description = serializers.CharField(max_length=250, required=True)

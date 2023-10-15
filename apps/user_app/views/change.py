@@ -6,8 +6,9 @@ from rest_framework.parsers import MultiPartParser
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from apps.user_app.responses import change_user_response, change_avatar_response
-from apps.user_app.schemas import ChangeUserRequestSchema
+from apps.user_app.responses import change_user_response, change_avatar_response, change_password_response, \
+    change_password_error_response
+from apps.user_app.schemas import ChangeUserRequestSchema, ChangePasswordRequestSchema
 from apps.user_app.validators import date_of_birth_validator
 
 
@@ -59,3 +60,36 @@ def change_avatar(request: Request):
     user.save()
 
     return Response({"status": "ok", "description": "Avatar set."}, status=status.HTTP_202_ACCEPTED)
+
+
+@swagger_auto_schema(
+    methods=["patch"],
+    request_body=ChangePasswordRequestSchema,
+    responses={
+        202: change_password_response,
+        400: change_password_error_response
+    }
+)
+@api_view(('PATCH',))
+@permission_classes((permissions.IsAuthenticated,))
+def change_password(request: Request):
+    old_password = request.data.get("old_password")
+    password = request.data.get("password")
+    confirm_password = request.data.get("confirm_password")
+    user = request.user
+    if user.check_password(old_password) and password == confirm_password:
+        user.set_password(password)
+        user.save()
+        return Response(
+            data={"status": "ok", "description": "Password has been changed"},
+            status=status.HTTP_202_ACCEPTED
+        )
+    elif password != confirm_password:
+        return Response(
+            data={"status": "error", "description": "Passwords didn't match"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    return Response(
+        data={"status": "error", "description": "Old password is incorrect"},
+        status=status.HTTP_400_BAD_REQUEST
+    )
