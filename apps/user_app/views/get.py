@@ -5,11 +5,11 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from user_app.models import User
-from user_app.parameters import user_id_parameter
-from user_app.responses import get_user_response, get_user_error_response, \
+from apps.user_app.models import User
+from apps.user_app.parameters import user_id_parameter
+from apps.user_app.responses import get_user_response, get_user_error_response, \
     get_users_response
-from user_app.serializers import UserSerializer
+from apps.user_app.serializers import UserSerializer
 
 
 @swagger_auto_schema(

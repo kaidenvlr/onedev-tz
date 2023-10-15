@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.crypto import get_random_string
 
-from user_app.models import User
+from apps.user_app.models import User
 
 
 class OrderStatus(models.IntegerChoices):

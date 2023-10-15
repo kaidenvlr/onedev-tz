@@ -1,7 +1,7 @@
 from drf_yasg import openapi
 
-from order_app.schemas import OrderNotFoundResponseSchema
-from order_app.serializers import OrderSerializer
+from apps.order_app.schemas import OrderNotFoundResponseSchema
+from apps.order_app.serializers import OrderSerializer
 
 orders_response = openapi.Response('Orders Response', OrderSerializer(many=True))
 order_response = openapi.Response('Order response', OrderSerializer)

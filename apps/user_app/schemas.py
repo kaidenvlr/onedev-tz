@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from user_app.validators import date_of_birth_validator
+from apps.user_app.validators import date_of_birth_validator
 
 
 class LoginResponseSchema(serializers.Serializer):

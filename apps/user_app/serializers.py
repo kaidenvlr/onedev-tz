@@ -1,3 +1,4 @@
+import datetime
 from datetime import date
 
 from django.contrib.auth.models import User as DjangoUser
@@ -5,8 +6,9 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
-from user_app.models import User
-from user_app.validators import phone_number_validator, date_of_birth_validator
+from apps.user_app.models import User
+from apps.user_app.utils import age
+from apps.user_app.validators import phone_number_validator, date_of_birth_validator
 
 
 class LoginSerializer(serializers.Serializer):
@@ -114,4 +116,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'first_name', 'last_name', 'phone_number', 'avatar', 'date_of_birth', 'age')
 
     def get_age(self, obj):
-        return (date.today() - obj.date_of_birth).days // 365
+        date_of_birth = str(obj.date_of_birth)
+        y, m, d = map(int, date_of_birth.split('-'))
+        dob = datetime.date(year=y, month=m, day=d)
+        return age(dob)

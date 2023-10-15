@@ -1,10 +1,8 @@
-import datetime
-
 from django.contrib.auth.models import User as DjangoUser
 from django.db import models
 from django.db.models.signals import post_save
 
-from user_app.validators import phone_number_validator, date_of_birth_validator
+from apps.user_app.validators import phone_number_validator, date_of_birth_validator
 
 
 class User(models.Model):

@@ -6,14 +6,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework.schemas.openapi import AutoSchema
-from rest_framework.views import APIView
 
-from user_app.models import User
-from user_app.responses import login_user_response, login_404_error_response, login_400_error_response, \
-    register_user_response
-from user_app.serializers import RegisterSerializer, LoginSerializer
-from user_app.utils import get_tokens_for_user
+from apps.user_app.responses import login_user_response, login_404_error_response, login_400_error_response
+from apps.user_app.serializers import LoginSerializer
+from apps.user_app.utils import get_tokens_for_user
 
 
 @csrf_exempt

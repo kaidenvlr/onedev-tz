@@ -9,9 +9,9 @@ from rest_framework.permissions import AllowAny
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from order_app.models import Order
-from order_app.responses import order_not_found_response, order_response, orders_response
-from order_app.serializers import OrderSerializer, OrderImageSerializer
+from apps.order_app.models import Order
+from apps.order_app.responses import order_not_found_response, order_response, orders_response
+from apps.order_app.serializers import OrderSerializer, OrderImageSerializer
 
 
 @swagger_auto_schema(

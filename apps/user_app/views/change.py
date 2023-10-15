@@ -6,9 +6,9 @@ from rest_framework.parsers import MultiPartParser
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from user_app.responses import change_user_response, change_avatar_response
-from user_app.schemas import ChangeUserRequestSchema
-from user_app.validators import date_of_birth_validator
+from apps.user_app.responses import change_user_response, change_avatar_response
+from apps.user_app.schemas import ChangeUserRequestSchema
+from apps.user_app.validators import date_of_birth_validator
 
 
 @swagger_auto_schema(

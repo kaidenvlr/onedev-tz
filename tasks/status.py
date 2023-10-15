@@ -2,8 +2,6 @@ import time
 
 from celery import shared_task
 
-from order_app.models import Order
-
 
 @shared_task
 def change_status(queryset):

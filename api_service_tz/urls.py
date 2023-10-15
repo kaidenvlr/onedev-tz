@@ -34,7 +34,8 @@ urlpatterns = [
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-    # User Application
-    path('api/user/', include('user_app.urls')),
-    path('api/order/', include('order_app.urls')),
+    # Applications
+    path('api/user/', include('apps.user_app.urls')),  # User Application
+
+    path('api/order/', include('apps.order_app.urls')),  # Order Application
 ]

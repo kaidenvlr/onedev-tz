@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import ngettext
 
-from order_app.models import Order
+from apps.order_app.models import Order
 from tasks.status import change_status
 
 

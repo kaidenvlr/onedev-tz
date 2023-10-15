@@ -1,5 +1,5 @@
 from django.urls import path
-from user_app.views import login, register, change, get
+from apps.user_app.views import login, get, change, register
 
 urlpatterns = [
     path('get-user/', get.get_user, name='user_get'),

@@ -1,7 +1,7 @@
 import datetime
 import re
 
-from user_app.utils import age
+from apps.user_app.utils import age
 
 
 def phone_number_validator(phone_number: str):

@@ -1,8 +1,8 @@
 from drf_yasg import openapi
 
-from user_app.schemas import LoginResponseSchema, LoginErrorResponseSchema, RegisterResponseSchema, \
+from apps.user_app.schemas import LoginResponseSchema, LoginErrorResponseSchema, RegisterResponseSchema, \
     ChangeUserResponseSchema, ChangeAvatarResponseSchema, UserNotFoundResponseSchema, RegisterErrorResponseSchema
-from user_app.serializers import UserSerializer
+from apps.user_app.serializers import UserSerializer
 
 login_user_response = openapi.Response('Login Response', LoginResponseSchema)
 login_404_error_response = openapi.Response('Incorrect Credentials', LoginErrorResponseSchema)
