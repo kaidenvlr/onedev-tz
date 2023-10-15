@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',  # JWT Auth
 
     'user_app',  # User Application for Register & Login
+    'order_app',  # Order Application for create & get order(s)
 ]
 
 MIDDLEWARE = [

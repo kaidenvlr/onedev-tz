@@ -9,7 +9,7 @@ from rest_framework.schemas.openapi import AutoSchema
 from rest_framework.views import APIView
 
 from user_app.models import User
-from user_app.responses import register_user_response
+from user_app.responses import register_user_response, register_error_response
 from user_app.serializers import RegisterSerializer
 
 
@@ -38,7 +38,8 @@ class UserAPIView(APIView):
     methods=['post'],
     request_body=RegisterSerializer,
     responses={
-        201: register_user_response
+        201: register_user_response,
+        400: register_error_response
     }
 )
 @api_view(('POST',))

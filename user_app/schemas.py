@@ -21,6 +21,10 @@ class RegisterResponseSchema(serializers.Serializer):
     last_name = serializers.CharField(max_length=100)
 
 
+class RegisterErrorResponseSchema(serializers.Serializer):
+    field = serializers.CharField(max_length=250)
+
+
 class ChangeUserRequestSchema(serializers.Serializer):
     first_name = serializers.CharField(max_length=100)
     last_name = serializers.CharField(max_length=100)
@@ -48,5 +52,6 @@ class ChangeUserResponseSchema(serializers.Serializer):
     description = serializers.CharField(max_length=250, required=True)
 
 
-class GetUserRequestSchema(serializers.Serializer):
-    id = serializers.IntegerField()
+class UserNotFoundResponseSchema(serializers.Serializer):
+    status = serializers.CharField(max_length=20, required=True)
+    description = serializers.CharField(max_length=250, required=True)

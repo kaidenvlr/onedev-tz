@@ -8,13 +8,38 @@ from user_app.validators import phone_number_validator, date_of_birth_validator
 
 
 class User(models.Model):
-    django_user = models.OneToOneField(DjangoUser, on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=12, validators=(phone_number_validator,), verbose_name="Номер телефона",
-                                    null=True)
-    avatar = models.ImageField(upload_to='avatar/', null=True, blank=True, verbose_name="Аватар пользователя")
-    date_of_birth = models.DateField(validators=[date_of_birth_validator], verbose_name="Дата рождения", null=True)
-    first_name = models.CharField(max_length=100, verbose_name="Имя", null=True)
-    last_name = models.CharField(max_length=100, verbose_name="Фамилия", null=True)
+    django_user = models.OneToOneField(
+        DjangoUser,
+        on_delete=models.CASCADE,
+        verbose_name="Связанная учетная запись в Django"
+    )
+    phone_number = models.CharField(
+        max_length=12,
+        validators=(phone_number_validator,),
+        null=True,
+        verbose_name="Номер телефона"
+    )
+    avatar = models.ImageField(
+        upload_to='avatar/',
+        null=True,
+        blank=True,
+        verbose_name="Аватар пользователя"
+    )
+    date_of_birth = models.DateField(
+        validators=[date_of_birth_validator],
+        null=True,
+        verbose_name="Дата рождения"
+    )
+    first_name = models.CharField(
+        max_length=100,
+        null=True,
+        verbose_name="Имя"
+    )
+    last_name = models.CharField(
+        max_length=100,
+        null=True,
+        verbose_name="Фамилия"
+    )
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}: {self.phone_number}"

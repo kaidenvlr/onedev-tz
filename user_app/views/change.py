@@ -1,4 +1,3 @@
-from django.core.exceptions import ObjectDoesNotExist
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import permissions, status
@@ -7,37 +6,9 @@ from rest_framework.parsers import MultiPartParser
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from user_app.models import User
-from user_app.parameters import user_id_parameter
 from user_app.responses import change_user_response, change_avatar_response
 from user_app.schemas import ChangeUserRequestSchema
-from user_app.serializers import UserSerializer
 from user_app.validators import date_of_birth_validator
-
-
-@swagger_auto_schema(
-    methods=["get"],
-    manual_parameters=[user_id_parameter]
-)
-@api_view(('GET',))
-@permission_classes((permissions.AllowAny,))
-def get_user(request: Request):
-    user_id = request.query_params.get("user_id")
-    try:
-        user = User.objects.get(id=user_id)
-    except ObjectDoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
-    serializer = UserSerializer(user)
-    return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@api_view(('GET',))
-@permission_classes((permissions.AllowAny,))
-def get_users(request: Request):
-    user = User.objects.all()
-    serializer = UserSerializer(user, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @swagger_auto_schema(
