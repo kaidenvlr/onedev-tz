@@ -107,6 +107,42 @@ class UserTests(APITestCase, URLPatternsTestCase):
         )
         self.assertEqual(202, response.status_code)
 
+    def test_change_password_incorrect_password(self):
+        self.api_authentication()
+        response = self.client.patch(
+            reverse("user_change_password"),
+            {
+                "old_password": self.token_password+"...",
+                "password": self.password,
+                "confirm_password": self.password
+            }
+        )
+        self.assertEqual(400, response.status_code)
+
+    def test_change_password_password_didnt_match(self):
+        self.api_authentication()
+        response = self.client.patch(
+            reverse("user_change_password"),
+            {
+                "old_password": self.token_password,
+                "password": self.password + "123",
+                "confirm_password": self.password
+            }
+        )
+        self.assertEqual(400, response.status_code)
+
+    def test_change_password(self):
+        self.api_authentication()
+        response = self.client.patch(
+            reverse("user_change_password"),
+            {
+                "old_password": self.token_password,
+                "password": self.password,
+                "confirm_password": self.password
+            }
+        )
+        self.assertEqual(202, response.status_code)
+
     def test_get_user(self):
         response = self.client.get(
             reverse("user_get"),
